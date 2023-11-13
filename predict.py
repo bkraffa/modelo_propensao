@@ -1,19 +1,18 @@
-import pickle5 as pickle
+import pickle
 import pandas as pd
 from unidecode import unidecode
 from datetime import datetime
 from flask import Flask,request,jsonify
 
-with open('objetos/custom_transformer_pickle.pkl', 'rb') as file:
+with open('objetos/custom_transformer_pickle.b', 'rb') as file:
     column_trans = pickle.load(file)
 
-with open('objetos/modelo_rfc.pkl', 'rb') as file:
+with open('objetos/modelo_rfc.b', 'rb') as file:
     rfc = pickle.load(file)
 
 def prepara_features(input):
     input = request.get_json()
-    print(input)
-    input_df = pd.DataFrame.from_dict(input)
+    input_df = pd.DataFrame(input)
     input_df['DtNascimento'] = pd.to_datetime(input_df['DtNascimento'])
     input_df['DtEmissao'] = pd.to_datetime(input_df['DtEmissao']).dt.normalize()
     input_df['Idade'] = ((input_df['DtEmissao'] - input_df['DtNascimento']).dt.days)/365

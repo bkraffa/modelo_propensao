@@ -16,7 +16,7 @@ def prepara_treino(df):
 
     column_trans.fit(X)
 
-    with open('objetos/custom_transformer_pickle.pkl', 'wb') as f:
+    with open('objetos/custom_transformer_pickle.b', 'wb') as f:
       pickle.dump(column_trans, f, -1)
 
     X = column_trans.transform(X)
