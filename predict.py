@@ -13,6 +13,7 @@ with open('objetos/modelo_rfc.b', 'rb') as file:
 def prepara_features(input):
     input = request.get_json()
     input_df = pd.DataFrame(input)
+    print(input_df)
     input_df['DtNascimento'] = pd.to_datetime(input_df['DtNascimento'])
     input_df['DtEmissao'] = pd.to_datetime(input_df['DtEmissao']).dt.normalize()
     input_df['Idade'] = ((input_df['DtEmissao'] - input_df['DtNascimento']).dt.days)/365
